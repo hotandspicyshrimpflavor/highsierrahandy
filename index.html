@@ -408,7 +408,7 @@
     const serviceNames = {'drywall': 'Drywall & Patching','plumbing': 'Plumbing Repairs','electrical': 'Electrical','doors-windows': 'Doors & Windows','flooring': 'Flooring Repairs','painting': 'Painting','network-install': 'Network Installation','wifi-optimize': 'WiFi Optimization','smart-home': 'Smart Home Setup','security': 'Security Systems','server-backup': 'Server & Backup','av-entertainment': 'AV & Entertainment'};
     function getServiceCategory(service) { const handymanServices = ['drywall', 'plumbing', 'electrical', 'doors-windows', 'flooring', 'painting']; return handymanServices.includes(service) ? 'handyman' : 'tech'; }
     const SUPABASE_URL = 'https://jcrwflbntaolulrbnbeq.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjcndmbGJudGFvbHVscmJuYmVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDExMTM3MDAsImV4cCI6MjA1NjY4OTcwMH0.sb_publishable_rTyb2vBvglge3ieFUBD7pQ_wkyuMDc3';
+    const SUPABASE_ANON_KEY = 'sb_publishable_rTyb2vBvglge3ieFUBD7pQ_wkyuMDc3';
     const RESEND_API_KEY = 're_W8A9vNei_MmXAXdqqCKrCDUQruP7dBEtb';
     async function sendEmailNotification(formData) {
       const serviceDisplay = serviceNames[formData.service] || formData.service;
@@ -499,4 +499,5 @@
       });
     };
     document.body.appendChild(script);
+  </script>
 </body></html>
