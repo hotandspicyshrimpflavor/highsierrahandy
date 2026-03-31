@@ -415,10 +415,9 @@
       const category = getServiceCategory(formData.service);
       const emailHtml = `<h1 style="color: #FF6B35; font-family: Arial, sans-serif;">New Quote Request</h1><div style="font-family: Arial, sans-serif; line-height: 1.6;"><p><strong>Customer:</strong> ${formData.name}</p><p><strong>Phone:</strong> <a href="tel:${formData.phone}">${formData.phone}</a></p><p><strong>Email:</strong> <a href="mailto:${formData.email}">${formData.email}</a></p><p><strong>Service:</strong> ${serviceDisplay}</p><p><strong>Category:</strong> ${category === 'handyman' ? 'Handyman Services' : 'Network & IoT'}</p><hr style="border: 1px solid #eee; margin: 20px 0;"><h3>Project Details:</h3><p>${formData.message.replace(/\n/g, '<br>')}</p><hr style="border: 1px solid #eee; margin: 20px 0;"><p style="color: #666; font-size: 12px;"><strong>Submitted:</strong> ${new Date().toLocaleString()}<br><strong>Source:</strong> High Sierra Handy Website</p></div>`;
       try {
-        const response = await fetch('https://api.resend.com/emails', {
+        const response = await fetch('/api/email', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${RESEND_API_KEY}`,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
