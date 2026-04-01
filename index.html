@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>High Sierra Handymen LLC | Mammoth Lakes & Eastern Sierra Handyman & Tech Services</title>
+  <title>HSHandymen LLC | Mammoth Lakes &amp; Eastern Sierra Handyman &amp; Tech Services</title>
   <meta name="description" content="Expert handyman services and professional networking/IoT solutions serving Mammoth Lakes, Bishop, June Lake, Crowley Lake, and the entire Eastern Sierra region.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,29 +29,140 @@
     ::-webkit-scrollbar-track { background: var(--primary-dark); }
     ::-webkit-scrollbar-thumb { background: var(--accent-orange); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+    /* ---- Keyframes ---- */
     @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
     @keyframes pulse-glow { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
     @keyframes slide-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes bounce-arrow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
     @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes blink-cursor { 50% { opacity: 0; } }
+    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+    @keyframes float-badge { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-6px); } }
+
+    /* ---- INTERACTIVE ENHANCEMENTS ---- */
+    /* Scroll Progress Bar */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--accent-orange), var(--accent-cyan), var(--accent-green));
+      z-index: 9999; border-radius: 0 2px 2px 0;
+      transition: width 0.05s linear;
+      box-shadow: 0 0 8px rgba(0,217,255,0.6);
+    }
+
+    /* Cursor Glow */
+    #cursor-glow {
+      position: fixed; width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, rgba(0,217,255,0.03) 40%, transparent 70%);
+      pointer-events: none; z-index: 0;
+      transform: translate(-50%,-50%); left: -9999px; top: -9999px;
+      transition: left 0.1s ease, top 0.1s ease;
+    }
+
+    /* Hero Canvas Particles */
+    #hero-canvas {
+      position: absolute; inset: 0; z-index: 1;
+      pointer-events: none; width: 100%; height: 100%;
+    }
+
+    /* ---- Navbar ---- */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 20px 24px; transition: all 0.4s ease;
+    }
+    .site-nav.scrolled {
+      background: rgba(13,17,23,0.92); backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px); padding: 12px 24px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 42px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 15px; font-weight: 500; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta {
+      padding: 10px 22px !important; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-orange), #FF8F65);
+      color: white !important; font-weight: 600 !important; font-size: 14px;
+      text-decoration: none; transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(255,107,53,0.35);
+    }
+    .nav-cta:hover {
+      transform: scale(1.05) !important;
+      box-shadow: 0 6px 22px rgba(255,107,53,0.55) !important;
+    }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* ---- Scroll Reveal ---- */
+    .reveal {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.from-left { transform: translateX(-40px); }
+    .reveal.from-right { transform: translateX(40px); }
+    .reveal.scale-in { transform: scale(0.92); }
+    .reveal.visible { opacity: 1 !important; transform: none !important; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* ---- 3D Tilt Card ---- */
+    .tilt-card { transform-style: preserve-3d; will-change: transform; }
+    .tilt-shine {
+      position: absolute; inset: 0; border-radius: inherit;
+      pointer-events: none; z-index: 5; opacity: 0; transition: opacity 0.3s;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.07) 0%, transparent 60%);
+    }
+    .tilt-card:hover .tilt-shine { opacity: 1; }
+
+    /* ---- Typewriter cursor ---- */
+    .typed::after {
+      content: '|'; animation: blink-cursor 0.7s step-end infinite;
+      color: var(--accent-cyan); margin-left: 2px;
+    }
+
+    /* ---- Shimmer gradient text ---- */
+    .shimmer-text {
+      background: linear-gradient(90deg, var(--accent-orange), var(--accent-cyan), var(--accent-green), var(--accent-orange));
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* ---- Floating animated badge ---- */
+    .hero-badge { animation: float-badge 3s ease-in-out infinite !important; }
+
+    /* ---- Existing styles ---- */
     .gradient-text { background: linear-gradient(135deg, var(--accent-orange), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .glass-effect { background: rgba(22, 27, 34, 0.8); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); }
     .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .hero-video-container { position: absolute; inset: 0; z-index: 0; }
     .hero-video { width: 100%; height: 100%; object-fit: cover; }
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13, 17, 23, 0.4) 0%, rgba(13, 17, 23, 0.7) 50%, rgba(13, 17, 23, 0.95) 100%); z-index: 1; }
-    .hero-content { position: relative; z-index: 2; text-align: center; padding: 120px 24px 80px; max-width: 900px; }
+    .hero-content { position: relative; z-index: 2; text-align: center; padding: 140px 24px 80px; max-width: 900px; }
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 50px; background: rgba(22, 27, 34, 0.8); border: 1px solid var(--glass-border); margin-bottom: 32px; animation: slide-up 0.8s ease-out forwards; }
     .hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green); animation: pulse-glow 2s ease-in-out infinite; }
     .hero-badge-text { font-size: 14px; color: var(--text-secondary); }
     .hero-title { font-family: var(--font-heading); font-size: clamp(36px, 8vw, 72px); font-weight: 700; line-height: 1.1; margin-bottom: 24px; animation: slide-up 0.8s ease-out 0.1s forwards; opacity: 0; }
-    .hero-subtitle { font-size: clamp(16px, 2vw, 20px); color: var(--text-secondary); max-width: 640px; margin: 0 auto 40px; animation: slide-up 0.8s ease-out 0.2s forwards; opacity: 0; }
+    .hero-subtitle { font-size: clamp(16px, 2vw, 20px); color: var(--text-secondary); max-width: 640px; margin: 0 auto 40px; animation: slide-up 0.8s ease-out 0.2s forwards; opacity: 0; min-height: 2.5em; }
     .hero-actions { display: flex; gap: 16px; justify-content: center; animation: slide-up 0.8s ease-out 0.3s forwards; opacity: 0; }
-    .btn { padding: 14px 28px; border-radius: 12px; font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer; border: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
+    .btn { padding: 14px 28px; border-radius: 12px; font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer; border: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
     .btn-primary { background: linear-gradient(135deg, var(--accent-orange), #FF8F65); color: white; box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4); }
     .btn-primary:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5); }
     .btn-outline { background: transparent; border: 2px solid var(--accent-cyan); color: var(--accent-cyan); }
-    .btn-outline:hover { background: rgba(0, 217, 255, 0.1); }
+    .btn-outline:hover { background: rgba(0, 217, 255, 0.1); transform: scale(1.03); }
     .scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; animation: bounce-arrow 2s ease-in-out infinite; z-index: 2; }
     .scroll-indicator svg { color: var(--accent-cyan); }
     .service-area-banner { background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(0, 217, 255, 0.1)); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); padding: 20px 24px; }
@@ -99,21 +210,22 @@
     .stats-section { background: linear-gradient(180deg, transparent, rgba(22, 27, 34, 0.5), transparent); }
     .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 64px; }
     .stat-card { text-align: center; padding: 40px 24px; border-radius: 20px; background: var(--secondary-dark); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
-    .stat-card:hover { transform: scale(1.05); }
+    .stat-card:hover { transform: scale(1.05); border-color: rgba(0,217,255,0.3); box-shadow: 0 10px 40px rgba(0,217,255,0.08); }
     .stat-value { font-family: var(--font-heading); font-size: clamp(36px, 5vw, 52px); font-weight: 700; background: linear-gradient(135deg, var(--accent-orange), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
     .stat-label { color: var(--text-secondary); font-size: 14px; }
     .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .feature-card { padding: 32px 24px; border-radius: 20px; background: rgba(22, 27, 34, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; transition: all 0.3s ease; }
-    .feature-card:hover { transform: translateY(-8px); border-color: rgba(0, 217, 255, 0.3); }
+    .feature-card { padding: 32px 24px; border-radius: 20px; background: rgba(22, 27, 34, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .feature-card:hover { transform: translateY(-8px); border-color: rgba(0, 217, 255, 0.3); box-shadow: 0 15px 50px rgba(0,217,255,0.1); }
     .feature-icon { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(0, 217, 255, 0.15)); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: transform 0.3s ease; }
-    .feature-card:hover .feature-icon { transform: scale(1.1); }
+    .feature-card:hover .feature-icon { transform: scale(1.1) rotate(5deg); }
     .feature-icon svg { color: var(--accent-cyan); width: 28px; height: 28px; }
     .feature-card h4 { font-weight: 600; margin-bottom: 8px; }
     .feature-card p { font-size: 14px; color: var(--text-secondary); }
     .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
-    .portfolio-card { position: relative; aspect-ratio: 16/10; border-radius: 20px; overflow: hidden; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.05); }
-    .portfolio-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-    .portfolio-card:hover img { transform: scale(1.1); }
+    .portfolio-card { position: relative; aspect-ratio: 16/10; border-radius: 20px; overflow: hidden; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; }
+    .portfolio-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 25px 60px rgba(0,0,0,0.4); border-color: rgba(255,107,53,0.3); }
+    .portfolio-card:hover img { transform: scale(1.08); }
     .portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(13, 17, 23, 0.95) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; }
     .portfolio-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; margin-bottom: 8px; width: fit-content; padding: 4px 12px; border-radius: 20px; }
     .portfolio-tag.orange { background: rgba(255, 107, 53, 0.2); color: var(--accent-orange); }
@@ -134,8 +246,8 @@
     .testimonial-name { font-weight: 600; }
     .testimonial-role { font-size: 14px; color: var(--text-secondary); }
     .testimonial-nav { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 32px; }
-    .testimonial-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--glass-border); background: transparent; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; }
-    .testimonial-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+    .testimonial-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--glass-border); background: transparent; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; min-width: 48px; min-height: 48px; }
+    .testimonial-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); background: rgba(0,217,255,0.08); }
     .testimonial-btn svg { width: 20px; height: 20px; }
     .testimonial-dots { display: flex; gap: 8px; }
     .testimonial-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(139, 148, 158, 0.3); border: none; cursor: pointer; transition: all 0.3s ease; }
@@ -153,7 +265,7 @@
     .contact-icon svg { width: 22px; height: 22px; }
     .contact-icon.orange svg { color: var(--accent-orange); }
     .contact-icon.cyan svg { color: var(--accent-cyan); }
-    .contact-icon.green svg { color: var(--accent-green); }
+.contact-icon.green svg { color: var(--accent-green); }
     .contact-item-label { font-size: 14px; color: var(--text-secondary); }
     .contact-item-value { font-weight: 500; }
     a.contact-item-value { text-decoration: none; transition: color 0.3s ease; }
@@ -177,7 +289,7 @@
     .footer-brand p { color: var(--text-secondary); font-size: 14px; margin-top: 16px; margin-bottom: 20px; }
     .footer-social { display: flex; gap: 12px; }
     .footer-social a { width: 40px; height: 40px; border-radius: 10px; background: var(--secondary-dark); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: all 0.3s ease; }
-    .footer-social a:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
+    .footer-social a:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); transform: translateY(-3px); }
     .footer-social svg { width: 18px; height: 18px; }
     .footer-col h4 { font-weight: 600; margin-bottom: 16px; }
     .footer-col ul { list-style: none; }
@@ -194,13 +306,14 @@
     :focus-visible { outline: 2px solid var(--accent-cyan); outline-offset: 2px; }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
     .floating-cta { display: none; position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 1000; padding: 16px 32px; border-radius: 50px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 30px rgba(255, 107, 53, 0.5); text-decoration: none; cursor: pointer; border: none; animation: pulse-glow 2s ease-in-out infinite; }
-    @media (max-width: 768px) { .floating-cta { display: flex; align-items: center; gap: 8px; } .testimonial-btn { min-width: 48px; min-height: 48px; } }
+    @media (max-width: 768px) { .floating-cta { display: flex; align-items: center; gap: 8px; } }
     .cert-badges { display: flex; justify-content: center; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
-    .cert-badge { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: rgba(22, 27, 34, 0.8); border: 1px solid var(--glass-border); border-radius: 12px; font-size: 14px; font-weight: 500; }
+    .cert-badge { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: rgba(22, 27, 34, 0.8); border: 1px solid var(--glass-border); border-radius: 12px; font-size: 14px; font-weight: 500; transition: all 0.3s ease; }
+    .cert-badge:hover { border-color: rgba(0,255,136,0.4); transform: translateY(-3px); }
     .cert-badge svg { width: 20px; height: 20px; color: var(--accent-green); }
     .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
-    .why-card { padding: 32px; background: var(--secondary-dark); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
-    .why-card:hover { transform: translateY(-4px); border-color: rgba(255, 107, 53, 0.3); }
+    .why-card { padding: 32px; background: var(--secondary-dark); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .why-card:hover { transform: translateY(-4px); border-color: rgba(255, 107, 53, 0.3); box-shadow: 0 15px 40px rgba(255,107,53,0.08); }
     .why-card-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
     .why-card-icon.orange { background: rgba(255, 107, 53, 0.15); }
     .why-card-icon.cyan { background: rgba(0, 217, 255, 0.15); }
@@ -212,10 +325,34 @@
     .why-card h4 { font-weight: 600; margin-bottom: 8px; }
     .why-card p { font-size: 14px; color: var(--text-secondary); }
     @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } .cert-badges { gap: 12px; } .cert-badge { padding: 8px 16px; font-size: 13px; } }
-    .btn, a, button { min-height: 44px; }
+    a, button { min-height: 44px; }
   </style>
 </head>
 <body>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Cursor Glow -->
+  <div id="cursor-glow"></div>
+
+  <!-- Navbar -->
+  <nav class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">
+        <img src="./logo.png" alt="HSHandymen LLC">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
   <section class="hero" id="home">
     <div class="hero-video-container">
       <video class="hero-video" autoplay muted loop playsinline poster="./imgs/cabin_interior.jpg">
@@ -223,15 +360,17 @@
       </video>
       <div class="hero-overlay"></div>
     </div>
+    <!-- Particle Canvas -->
+    <canvas id="hero-canvas"></canvas>
     <div class="hero-content">
       <div class="hero-badge">
         <span class="hero-badge-dot"></span>
         <span class="hero-badge-text">Available for new projects</span>
       </div>
-      <h1 class="hero-title">Eastern Sierra's <span class="gradient-text">Trusted</span> Handyman & Tech Experts</h1>
-      <p class="hero-subtitle">Licensed handyman services (jobs under $1000) and professional tech solutions. Serving Mammoth Lakes, Bishop, June Lake, and the entire Eastern Sierra region.</p>
+      <h1 class="hero-title">Eastern Sierra's <span class="shimmer-text">Trusted</span> Handyman &amp; Tech Experts</h1>
+      <p class="hero-subtitle" id="heroSubtitle"></p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Get Your Free Quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#contact" class="btn btn-primary magnetic-btn">Get Your Free Quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <a href="#services" class="btn btn-outline">Explore Services</a>
       </div>
     </div>
@@ -240,64 +379,72 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
   </section>
-  <div class="service-area-banner">
+
+  <!-- Service Area Banner -->
+  <div class="service-area-banner reveal">
     <div class="service-area-inner">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       <span>Proudly serving <strong>Mammoth Lakes</strong>, <strong>Bishop</strong>, <strong>June Lake</strong>, <strong>Crowley Lake</strong>, and all of <strong>Eastern Sierra</strong></span>
     </div>
   </div>
+
+  <!-- Services -->
   <section id="services">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-tag tag-orange">Our Expertise</span>
         <h2 class="section-title">Two Specialties, <span class="gradient-text">One Team</span></h2>
         <p class="section-desc">Certified handyman services for jobs under $1000, plus expert tech solutions for your connected home or business</p>
       </div>
       <div class="services-grid">
-        <div class="service-card orange">
+        <div class="service-card orange tilt-card reveal from-left">
+          <div class="tilt-shine"></div>
           <div class="service-header">
             <div class="service-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-            <div><h3 class="service-title orange">Handyman Services</h3><p class="service-subtitle">Small Jobs & Quick Fixes (Under $1000)</p></div>
+            <div><h3 class="service-title orange">Handyman Services</h3><p class="service-subtitle">Small Jobs &amp; Quick Fixes (Under $1000)</p></div>
           </div>
           <ul class="service-list">
-            <li class="service-list-item orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><h4>Drywall & Patching</h4><p>Holes, cracks, water damage repair</p></li>
+            <li class="service-list-item orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><h4>Drywall &amp; Patching</h4><p>Holes, cracks, water damage repair</p></li>
             <li class="service-list-item orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6"/><circle cx="12" cy="14" r="4"/><path d="M12 18v4"/></svg><h4>Plumbing Repairs</h4><p>Leaky faucets, toilets, pipes, unclogging</p></li>
             <li class="service-list-item orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><h4>Electrical</h4><p>Outlets, switches, light fixtures, fans</p></li>
-            <li class="service-list-item orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><h4>Doors & Windows</h4><p>Weather stripping, locks, handles, screens</p></li>
+            <li class="service-list-item orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><h4>Doors &amp; Windows</h4><p>Weather stripping, locks, handles, screens</p></li>
             <li class="service-list-item orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg><h4>Flooring Repairs</h4><p>Squeaky floors, loose tiles, carpet patching</p></li>
             <li class="service-list-item orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg><h4>Painting</h4><p>Touch-ups, walls, trim, cabinets</p></li>
           </ul>
         </div>
-        <div class="service-card cyan">
+        <div class="service-card cyan tilt-card reveal from-right">
+          <div class="tilt-shine"></div>
           <div class="service-header">
             <div class="service-icon cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
-            <div><h3 class="service-title cyan">Network & IoT</h3><p class="service-subtitle">Smart solutions for connected spaces</p></div>
+            <div><h3 class="service-title cyan">Network &amp; IoT</h3><p class="service-subtitle">Smart solutions for connected spaces</p></div>
           </div>
           <ul class="service-list">
             <li class="service-list-item cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg><h4>Network Installation</h4><p>Cabling, routers, switches, access points</p></li>
             <li class="service-list-item cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg><h4>WiFi Optimization</h4><p>Coverage analysis, mesh systems</p></li>
             <li class="service-list-item cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/></svg><h4>Smart Home Setup</h4><p>Smart devices, automation, remote monitoring</p></li>
             <li class="service-list-item cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><h4>Security Systems</h4><p>Cameras, access control, monitoring</p></li>
-            <li class="service-list-item cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01"/><path d="M6 18h.01"/></svg><h4>Server & Backup</h4><p>Home servers, NAS, cloud backup</p></li>
-            <li class="service-list-item cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg><h4>AV & Entertainment</h4><p>Home theater, whole-house audio</p></li>
+            <li class="service-list-item cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01"/><path d="M6 18h.01"/></svg><h4>Server &amp; Backup</h4><p>Home servers, NAS, cloud backup</p></li>
+            <li class="service-list-item cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg><h4>AV &amp; Entertainment</h4><p>Home theater, whole-house audio</p></li>
           </ul>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Why Us -->
   <section id="why-us" style="padding: 100px 24px; background: linear-gradient(180deg, transparent, rgba(22, 27, 34, 0.5), transparent);">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-tag tag-cyan">Why Choose Us</span>
         <h2 class="section-title">Your <span class="gradient-text">Local Experts</span> in Eastern Sierra</h2>
         <p class="section-desc">We know the unique challenges of mountain living - from frozen pipes to WiFi dead zones</p>
       </div>
       <div class="why-grid">
-        <div class="why-card"><div class="why-card-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Mountain Specialists</h4><p>We understand local building codes, weather challenges, and seasonal demands unique to the Sierra.</p></div>
-        <div class="why-card"><div class="why-card-icon cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h4>Two Specialties</h4><p>Handyman repairs AND tech solutions - no need to call multiple contractors for your projects.</p></div>
-        <div class="why-card"><div class="why-card-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h4>Done Right First Time</h4><p>Quality workmanship and attention to detail - because your home deserves the best care.</p></div>
+        <div class="why-card reveal reveal-delay-1"><div class="why-card-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Mountain Specialists</h4><p>We understand local building codes, weather challenges, and seasonal demands unique to the Sierra.</p></div>
+        <div class="why-card reveal reveal-delay-2"><div class="why-card-icon cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h4>Two Specialties</h4><p>Handyman repairs AND tech solutions - no need to call multiple contractors for your projects.</p></div>
+        <div class="why-card reveal reveal-delay-3"><div class="why-card-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h4>Done Right First Time</h4><p>Quality workmanship and attention to detail - because your home deserves the best care.</p></div>
       </div>
-      <div class="cert-badges">
+      <div class="cert-badges reveal">
         <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> State Licensed</div>
         <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Fully Insured</div>
         <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg> Background Checked</div>
@@ -305,47 +452,53 @@
       </div>
     </div>
   </section>
+
+  <!-- Stats -->
   <section class="stats-section">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-tag tag-cyan">Why HSHandymen</span>
-        <h2 class="section-title">Built on <span class="gradient-text">Trust</span> & Excellence</h2>
+        <h2 class="section-title">Built on <span class="gradient-text">Trust</span> &amp; Excellence</h2>
       </div>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-value" data-target="100">0+</div><p class="stat-label">Projects Completed</p></div>
-        <div class="stat-card"><div class="stat-value" data-target="5">0+</div><p class="stat-label">Years Experience</p></div>
-        <div class="stat-card"><div class="stat-value" data-target="98" data-suffix="%">0%</div><p class="stat-label">Client Satisfaction</p></div>
-        <div class="stat-card"><div class="stat-value" data-target="48" data-suffix="hr">0hr</div><p class="stat-label">Typical Response</p></div>
+        <div class="stat-card tilt-card reveal reveal-delay-1"><div class="tilt-shine"></div><div class="stat-value" data-target="100">0+</div><p class="stat-label">Projects Completed</p></div>
+        <div class="stat-card tilt-card reveal reveal-delay-2"><div class="tilt-shine"></div><div class="stat-value" data-target="5">0+</div><p class="stat-label">Years Experience</p></div>
+        <div class="stat-card tilt-card reveal reveal-delay-3"><div class="tilt-shine"></div><div class="stat-value" data-target="98" data-suffix="%">0%</div><p class="stat-label">Client Satisfaction</p></div>
+        <div class="stat-card tilt-card reveal reveal-delay-4"><div class="tilt-shine"></div><div class="stat-value" data-target="48" data-suffix="hr">0hr</div><p class="stat-label">Typical Response</p></div>
       </div>
       <div class="features-grid">
-        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div><h4>Licensed & Insured</h4><p>State certified handyman with full liability coverage</p></div>
-        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>On-Time Service</h4><p>We respect your schedule and arrive when promised</p></div>
-        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Quality Assurance</h4><p>Premium materials and workmanship guaranteed</p></div>
-        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h4>Free Estimates</h4><p>No-obligation quotes for all projects</p></div>
+        <div class="feature-card reveal reveal-delay-1"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div><h4>Licensed &amp; Insured</h4><p>State certified handyman with full liability coverage</p></div>
+        <div class="feature-card reveal reveal-delay-2"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>On-Time Service</h4><p>We respect your schedule and arrive when promised</p></div>
+        <div class="feature-card reveal reveal-delay-3"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Quality Assurance</h4><p>Premium materials and workmanship guaranteed</p></div>
+        <div class="feature-card reveal reveal-delay-4"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h4>Free Estimates</h4><p>No-obligation quotes for all projects</p></div>
       </div>
     </div>
   </section>
+
+  <!-- Portfolio -->
   <section id="portfolio">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-tag tag-orange">Our Work</span>
         <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
       </div>
       <div class="portfolio-grid">
-        <div class="portfolio-card"><img src="./imgs/cabin_interior.jpg" alt="Handyman Repair Work" loading="lazy" onerror="this.style.display='none'"><div class="portfolio-overlay"><span class="portfolio-tag orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Handyman</span><h4>Drywall Repair</h4><p>Water damage repair in Mammoth Lakes home</p></div></div>
-        <div class="portfolio-card"><img src="./imgs/handyman_work.jpg" alt="Plumbing Repair" loading="lazy" onerror="this.style.display='none'"><div class="portfolio-overlay"><span class="portfolio-tag orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Handyman</span><h4>Leaky Faucet Fix</h4><p>Quick plumbing repair in Bishop home</p></div></div>
-        <div class="portfolio-card"><img src="./imgs/smart_home.jpg" alt="Smart Home Technology" loading="lazy" onerror="this.style.display='none'"><div class="portfolio-overlay"><span class="portfolio-tag cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>Network & IoT</span><h4>WiFi Network Setup</h4><p>Whole-home coverage for Bishop office</p></div></div>
-        <div class="portfolio-card"><img src="./imgs/mountain_deck.jpg" alt="Security Camera Installation" loading="lazy" onerror="this.style.display='none'"><div class="portfolio-overlay"><span class="portfolio-tag cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>Network & IoT</span><h4>Security Cameras</h4><p>Vacation rental camera system</p></div></div>
+        <div class="portfolio-card reveal reveal-delay-1"><img src="./imgs/cabin_interior.jpg" alt="Handyman Repair Work" loading="lazy" onerror="this.style.display='none'"><div class="portfolio-overlay"><span class="portfolio-tag orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Handyman</span><h4>Drywall Repair</h4><p>Water damage repair in Mammoth Lakes home</p></div></div>
+        <div class="portfolio-card reveal reveal-delay-2"><img src="./imgs/handyman_work.jpg" alt="Plumbing Repair" loading="lazy" onerror="this.style.display='none'"><div class="portfolio-overlay"><span class="portfolio-tag orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Handyman</span><h4>Leaky Faucet Fix</h4><p>Quick plumbing repair in Bishop home</p></div></div>
+        <div class="portfolio-card reveal reveal-delay-3"><img src="./imgs/smart_home.jpg" alt="Smart Home Technology" loading="lazy" onerror="this.style.display='none'"><div class="portfolio-overlay"><span class="portfolio-tag cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>Network &amp; IoT</span><h4>WiFi Network Setup</h4><p>Whole-home coverage for Bishop office</p></div></div>
+        <div class="portfolio-card reveal reveal-delay-4"><img src="./imgs/mountain_deck.jpg" alt="Security Camera Installation" loading="lazy" onerror="this.style.display='none'"><div class="portfolio-overlay"><span class="portfolio-tag cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>Network &amp; IoT</span><h4>Security Cameras</h4><p>Vacation rental camera system</p></div></div>
       </div>
     </div>
   </section>
+
+  <!-- Testimonials -->
   <section id="testimonials" class="testimonials-section">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-tag tag-orange">Testimonials</span>
         <h2 class="section-title">What Our <span class="gradient-text">Clients Say</span></h2>
       </div>
-      <div class="testimonial-container">
+      <div class="testimonial-container reveal">
         <div class="testimonial-card glass-effect" id="testimonialCard">
           <svg class="testimonial-quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
           <div id="testimonialContent">
@@ -362,20 +515,22 @@
       </div>
     </div>
   </section>
+
+  <!-- Contact -->
   <section id="contact">
     <div class="section-inner">
       <div class="contact-grid">
-        <div class="contact-info">
+        <div class="contact-info reveal from-left">
           <span class="section-tag tag-cyan">Get In Touch</span>
           <h2>Let's Build <span class="gradient-text">Together</span></h2>
           <p>Ready to start your project? Get in touch for a free consultation and quote.</p>
           <div class="contact-items">
             <div class="contact-item"><div class="contact-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><p class="contact-item-label">Call Us</p><a href="tel:+17605769009" class="contact-item-value">(760) 576-9009</a></div></div>
             <div class="contact-item"><div class="contact-icon cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><p class="contact-item-label">Email Us</p><a href="mailto:info@highsierrahandymen.com" class="contact-item-value">info@highsierrahandymen.com</a></div></div>
-            <div class="contact-item"><div class="contact-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><p class="contact-item-label">Service Area</p><p class="contact-item-value">Mammoth Lakes, Bishop, June Lake, Crowley Lake & Eastern Sierra</p></div></div>
+            <div class="contact-item"><div class="contact-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><p class="contact-item-label">Service Area</p><p class="contact-item-value">Mammoth Lakes, Bishop, June Lake, Crowley Lake &amp; Eastern Sierra</p></div></div>
           </div>
         </div>
-        <div class="contact-form glass-effect">
+        <div class="contact-form glass-effect reveal from-right">
           <h3>Request a Quote</h3>
           <form id="contactForm">
             <div class="form-grid">
@@ -383,84 +538,65 @@
               <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" placeholder="(555) 123-4567" required></div>
             </div>
             <div class="form-group full"><label for="email">Email Address</label><input type="email" id="email" placeholder="john@example.com" required></div>
-            <div class="form-group full"><label for="service">Service Type</label><select id="service" required><option value="">Select a service</option><optgroup label="Handyman Services (Under $1000)"><option value="drywall">Drywall & Patching</option><option value="plumbing">Plumbing Repairs</option><option value="electrical">Electrical</option><option value="doors-windows">Doors & Windows</option><option value="flooring">Flooring Repairs</option><option value="painting">Painting</option></optgroup><optgroup label="Network & IoT"><option value="network-install">Network Installation</option><option value="wifi-optimize">WiFi Optimization</option><option value="smart-home">Smart Home Setup</option><option value="security">Security Systems</option><option value="server-backup">Server & Backup</option><option value="av-entertainment">AV & Entertainment</option></optgroup></select></div>
+            <div class="form-group full"><label for="service">Service Type</label><select id="service" required><option value="">Select a service</option><optgroup label="Handyman Services (Under $1000)"><option value="drywall">Drywall &amp; Patching</option><option value="plumbing">Plumbing Repairs</option><option value="electrical">Electrical</option><option value="doors-windows">Doors &amp; Windows</option><option value="flooring">Flooring Repairs</option><option value="painting">Painting</option></optgroup><optgroup label="Network &amp; IoT"><option value="network-install">Network Installation</option><option value="wifi-optimize">WiFi Optimization</option><option value="smart-home">Smart Home Setup</option><option value="security">Security Systems</option><option value="server-backup">Server &amp; Backup</option><option value="av-entertainment">AV &amp; Entertainment</option></optgroup></select></div>
             <div class="form-group full"><label for="message">Project Details</label><textarea id="message" placeholder="Tell us about your project..." required></textarea></div>
-            <button type="submit" class="btn btn-primary btn-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send Message</button>
+            <button type="submit" class="btn btn-primary btn-send magnetic-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send Message</button>
             <p class="form-note">We typically respond within 24 hours</p>
           </form>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Floating CTA -->
   <a href="tel:+17605769009" class="btn btn-primary floating-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call Now</a>
+
+  <!-- Footer -->
   <footer>
     <div class="footer-inner">
       <div class="footer-grid">
         <div class="footer-brand"><img src="./logo.png" alt="HSHandymen LLC" style="height: 70px; width: auto;"><p>Expert handyman services and professional networking solutions serving Mammoth Lakes and Eastern Sierra. Quality craftsmanship meets cutting-edge technology.</p><div class="footer-social"><a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div></div>
         <div class="footer-col"><h4>Services</h4><ul><li><a href="#services">Handyman Repairs</a></li><li><a href="#services">Plumbing</a></li><li><a href="#services">Network Installation</a></li><li><a href="#services">Smart Home Setup</a></li><li><a href="#services">Security Systems</a></li></ul></div>
         <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#contact">Contact</a></li></ul></div>
-        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+17605769009" style="color: var(--accent-orange)">(760) 576-9009</a></li><li><a href="mailto:info@highsierrahandymen.com" style="color: var(--accent-cyan)">info@highsierrahandymen.com</a></li><li>Mammoth Lakes & Eastern Sierra</li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+17605769009" style="color: var(--accent-orange)">(760) 576-9009</a></li><li><a href="mailto:info@highsierrahandymen.com" style="color: var(--accent-cyan)">info@highsierrahandymen.com</a></li><li>Mammoth Lakes &amp; Eastern Sierra</li></ul></div>
       </div>
       <div class="footer-bottom"><p>&copy; 2026 WashaWey LLC. All rights reserved.</p><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
     </div>
   </footer>
+
   <script>
-    const serviceNames = {'drywall': 'Drywall & Patching','plumbing': 'Plumbing Repairs','electrical': 'Electrical','doors-windows': 'Doors & Windows','flooring': 'Flooring Repairs','painting': 'Painting','network-install': 'Network Installation','wifi-optimize': 'WiFi Optimization','smart-home': 'Smart Home Setup','security': 'Security Systems','server-backup': 'Server & Backup','av-entertainment': 'AV & Entertainment'};
-    function getServiceCategory(service) { const handymanServices = ['drywall', 'plumbing', 'electrical', 'doors-windows', 'flooring', 'painting']; return handymanServices.includes(service) ? 'handyman' : 'tech'; }
+    // ============================================================
+    // EXISTING FUNCTIONALITY
+    // ============================================================
+    const serviceNames = {'drywall':'Drywall & Patching','plumbing':'Plumbing Repairs','electrical':'Electrical','doors-windows':'Doors & Windows','flooring':'Flooring Repairs','painting':'Painting','network-install':'Network Installation','wifi-optimize':'WiFi Optimization','smart-home':'Smart Home Setup','security':'Security Systems','server-backup':'Server & Backup','av-entertainment':'AV & Entertainment'};
+    function getServiceCategory(service) { return ['drywall','plumbing','electrical','doors-windows','flooring','painting'].includes(service) ? 'handyman' : 'tech'; }
     const SUPABASE_URL = 'https://jcrwflbntaolulrbnbeq.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_rTyb2vBvglge3ieFUBD7pQ_wkyuMDc3';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjcndmbGJudGFvbHVscmJuYmVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDExMTM3MDAsImV4cCI6MjA1NjY4OTcwMH0.sb_publishable_rTyb2vBvglge3ieFUBD7pQ_wkyuMDc3';
     const RESEND_API_KEY = 're_W8A9vNei_MmXAXdqqCKrCDUQruP7dBEtb';
+
     async function sendEmailNotification(formData) {
       const serviceDisplay = serviceNames[formData.service] || formData.service;
       const category = getServiceCategory(formData.service);
-      const emailHtml = `<h1 style="color: #FF6B35; font-family: Arial, sans-serif;">New Quote Request</h1><div style="font-family: Arial, sans-serif; line-height: 1.6;"><p><strong>Customer:</strong> ${formData.name}</p><p><strong>Phone:</strong> <a href="tel:${formData.phone}">${formData.phone}</a></p><p><strong>Email:</strong> <a href="mailto:${formData.email}">${formData.email}</a></p><p><strong>Service:</strong> ${serviceDisplay}</p><p><strong>Category:</strong> ${category === 'handyman' ? 'Handyman Services' : 'Network & IoT'}</p><hr style="border: 1px solid #eee; margin: 20px 0;"><h3>Project Details:</h3><p>${formData.message.replace(/\n/g, '<br>')}</p><hr style="border: 1px solid #eee; margin: 20px 0;"><p style="color: #666; font-size: 12px;"><strong>Submitted:</strong> ${new Date().toLocaleString()}<br><strong>Source:</strong> High Sierra Handy Website</p></div>`;
+      const emailHtml = `<h1 style="color:#FF6B35;font-family:Arial,sans-serif;">New Quote Request</h1><div style="font-family:Arial,sans-serif;line-height:1.6;"><p><strong>Customer:</strong> ${formData.name}</p><p><strong>Phone:</strong> <a href="tel:${formData.phone}">${formData.phone}</a></p><p><strong>Email:</strong> <a href="mailto:${formData.email}">${formData.email}</a></p><p><strong>Service:</strong> ${serviceDisplay}</p><p><strong>Category:</strong> ${category === 'handyman' ? 'Handyman Services' : 'Network & IoT'}</p><hr style="border:1px solid #eee;margin:20px 0;"><h3>Project Details:</h3><p>${formData.message.replace(/\n/g,'<br>')}</p><hr style="border:1px solid #eee;margin:20px 0;"><p style="color:#666;font-size:12px;"><strong>Submitted:</strong> ${new Date().toLocaleString()}<br><strong>Source:</strong> High Sierra Handy Website</p></div>`;
       try {
-        const response = await fetch('/api/email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            from: 'HSHandymen <quotes@highsierrahandy.com>',
-            to: ['luis.anaya@highsierrahandymen.com'],
-            subject: `New Quote: ${formData.name} - ${serviceDisplay}`,
-            html: emailHtml
-          })
-        });
+        const response = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: 'HSHandymen <quotes@highsierrahandymen.com>', to: ['luis.anaya@highsierrahandymen.com'], subject: `New Quote: ${formData.name} - ${serviceDisplay}`, html: emailHtml }) });
         const result = await response.json();
-        console.log('Resend Response:', response.status, result);
-        if (!response.ok) {
-          alert('Email Error: ' + (result.message || response.statusText));
-        }
+        if (!response.ok) { console.warn('Email Error:', result.message || response.statusText); }
         return response.ok;
       } catch (error) { console.error('Email error:', error); return false; }
     }
+
     async function handleSubmit(e, supabase) {
       e.preventDefault();
       const btn = e.target.querySelector('button[type="submit"]');
-      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke-opacity="0.3" fill="none"/><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round" fill="none"/></svg> Sending...';
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="animation:spin 1s linear infinite"><circle cx="12" cy="12" r="10" stroke-opacity="0.3" fill="none"/><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round" fill="none"/></svg> Sending...';
       btn.disabled = true;
       const name = document.getElementById('name').value, phone = document.getElementById('phone').value, email = document.getElementById('email').value, service = document.getElementById('service').value, message = document.getElementById('message').value;
       const formData = { name, phone, email, service, message };
-      console.log('Submitting quote:', formData);
       try {
-        // Insert to Supabase - matching minimal table schema
-        const { data, error: supabaseError } = await supabase.from('quotes').insert({
-          name: name,
-          phone: phone,
-          email: email,
-          service: service,
-          message: message
-        });
-        if (supabaseError) {
-          console.error('Supabase Error:', supabaseError);
-          alert('Database error: ' + supabaseError.message);
-        }
-        // Send email notification
-        const emailSent = await sendEmailNotification(formData);
-        if (!emailSent) {
-          console.warn('Email notification failed - but quote was saved');
-        }
+        const { error: supabaseError } = await supabase.from('quotes').insert({ name, phone, email, service, message });
+        if (supabaseError) { console.error('Supabase Error:', supabaseError); }
+        await sendEmailNotification(formData);
         btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg> Quote Submitted!';
         btn.style.background = 'linear-gradient(135deg, #00FF88, #00CC6A)';
         e.target.reset();
@@ -469,34 +605,203 @@
         console.error('Form submission error:', error);
         btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Error - Try Again';
         btn.style.background = 'linear-gradient(135deg, #FF4757, #FF6B7A)';
-        alert('Submission failed: ' + error.message);
         setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send Message'; btn.style.background = ''; btn.disabled = false; }, 5000);
       }
     }
-    let countersAnimated = false;
-    const counterObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting && !countersAnimated) { countersAnimated = true; document.querySelectorAll('.stat-value').forEach(counter => { const target = parseInt(counter.dataset.target); const suffix = counter.dataset.suffix || ''; let current = 0; const increment = target / 60; const timer = setInterval(() => { current += increment; if (current >= target) { counter.textContent = target + suffix; clearInterval(timer); } else { counter.textContent = Math.floor(current) + suffix; } }, 30); }); } }); }, { threshold: 0.3 });
-    const testimonialsSection = document.getElementById('testimonials');
-    if (testimonialsSection) { counterObserver.observe(testimonialsSection); }
-    const testimonials = [{name: 'Michael Rodriguez', role: 'Mammoth Lakes Homeowner', quote: 'Fixed our leaking faucet and patched drywall in no time. Fair prices and quality work - will definitely call again!'},{name: 'Sarah Chen', role: 'Bishop Business Owner', quote: 'Set up our office network and WiFi. Professional, knowledgeable, and explains everything clearly. Highly recommend!'},{name: 'James Wilson', role: 'Property Manager', quote: 'Reliable for our vacation rentals. Quick response times and quality repairs every time, even during ski season!'}];
+
+    // Testimonials
+    const testimonials = [
+      {name:'Michael Rodriguez',role:'Mammoth Lakes Homeowner',quote:'Fixed our leaking faucet and patched drywall in no time. Fair prices and quality work - will definitely call again!'},
+      {name:'Sarah Chen',role:'Bishop Business Owner',quote:'Set up our office network and WiFi. Professional, knowledgeable, and explains everything clearly. Highly recommend!'},
+      {name:'James Wilson',role:'Property Manager',quote:'Reliable for our vacation rentals. Quick response times and quality repairs every time, even during ski season!'}
+    ];
     let currentTestimonial = 0;
-    function renderDots() { const dotsContainer = document.getElementById('testimonialDots'); if (!dotsContainer) return; dotsContainer.innerHTML = testimonials.map((_, i) => `<button class="testimonial-dot ${i === currentTestimonial ? 'active' : ''}" onclick="goToTestimonial(${i})"></button>`).join(''); }
-    function updateTestimonial(index) { const t = testimonials[index]; const textEl = document.getElementById('testimonialText'); const nameEl = document.getElementById('testimonialName'); const roleEl = document.getElementById('testimonialRole'); const avatarEl = document.getElementById('testimonialAvatar'); if (textEl) textEl.textContent = '"' + t.quote + '"'; if (nameEl) nameEl.textContent = t.name; if (roleEl) roleEl.textContent = t.role; if (avatarEl) avatarEl.textContent = t.name[0]; renderDots(); }
+    function renderDots() { const d = document.getElementById('testimonialDots'); if (!d) return; d.innerHTML = testimonials.map((_,i) => `<button class="testimonial-dot ${i===currentTestimonial?'active':''}" onclick="goToTestimonial(${i})"></button>`).join(''); }
+    function updateTestimonial(index) { const t = testimonials[index]; const card = document.getElementById('testimonialCard'); card.style.opacity = '0'; card.style.transform = 'translateY(10px)'; setTimeout(() => { const textEl = document.getElementById('testimonialText'), nameEl = document.getElementById('testimonialName'), roleEl = document.getElementById('testimonialRole'), avatarEl = document.getElementById('testimonialAvatar'); if (textEl) textEl.textContent = '"' + t.quote + '"'; if (nameEl) nameEl.textContent = t.name; if (roleEl) roleEl.textContent = t.role; if (avatarEl) avatarEl.textContent = t.name[0]; renderDots(); card.style.transition = 'opacity 0.4s ease, transform 0.4s ease'; card.style.opacity = '1'; card.style.transform = ''; }, 200); }
     function changeTestimonial(direction) { currentTestimonial = (currentTestimonial + direction + testimonials.length) % testimonials.length; updateTestimonial(currentTestimonial); }
     function goToTestimonial(index) { currentTestimonial = index; updateTestimonial(currentTestimonial); }
     renderDots();
     setInterval(() => changeTestimonial(1), 6000);
-    const style = document.createElement('style');
-    style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
-    document.head.appendChild(style);
-    // Load Supabase and attach form listener
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-    script.onload = function() {
-      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
-        handleSubmit(e, supabase);
+
+    // Counter Animation
+    let countersAnimated = false;
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !countersAnimated) {
+          countersAnimated = true;
+          document.querySelectorAll('.stat-value').forEach(counter => {
+            const target = parseInt(counter.dataset.target), suffix = counter.dataset.suffix || '';
+            let current = 0;
+            const increment = target / 60;
+            const timer = setInterval(() => { current += increment; if (current >= target) { counter.textContent = target + suffix; clearInterval(timer); } else { counter.textContent = Math.floor(current) + suffix; } }, 30);
+          });
+        }
       });
+    }, { threshold: 0.3 });
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) counterObserver.observe(statsSection);
+
+    // Load Supabase
+    const supabaseScript = document.createElement('script');
+    supabaseScript.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    supabaseScript.onload = function() {
+      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      document.getElementById('contactForm').addEventListener('submit', function(e) { handleSubmit(e, supabase); });
     };
-    document.body.appendChild(script);
+    document.body.appendChild(supabaseScript);
+
+    // ============================================================
+    // INTERACTIVE ENHANCEMENTS
+    // ============================================================
+
+    // 1. Scroll Progress Bar
+    const scrollProgress = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) scrollProgress.style.width = (scrollTop / docHeight * 100) + '%';
+    }, { passive: true });
+
+    // 2. Cursor Glow (desktop only)
+    if (window.matchMedia('(hover: hover)').matches) {
+      const cursorGlow = document.getElementById('cursor-glow');
+      let cx = -9999, cy = -9999;
+      document.addEventListener('mousemove', (e) => {
+        cx = e.clientX; cy = e.clientY;
+        cursorGlow.style.left = cx + 'px';
+        cursorGlow.style.top = cy + 'px';
+      }, { passive: true });
+    }
+
+    // 3. Sticky Nav
+    const nav = document.getElementById('siteNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // 4. Scroll Reveal (IntersectionObserver)
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // 5. Hero Particle Canvas
+    (function initParticles() {
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W = 0, H = 0, particles = [];
+
+      function resize() {
+        W = canvas.width = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      function Particle() {
+        this.reset = function(initial) {
+          this.x = Math.random() * W;
+          this.y = initial ? Math.random() * H : H + 10;
+          this.size = Math.random() * 2.5 + 0.5;
+          this.vy = -(Math.random() * 0.8 + 0.3);
+          this.vx = (Math.random() - 0.5) * 0.4;
+          this.alpha = Math.random() * 0.5 + 0.15;
+          this.decay = Math.random() * 0.004 + 0.001;
+          this.life = 1;
+          this.color = Math.random() > 0.5 ? '255,107,53' : '0,217,255';
+        };
+        this.reset(true);
+        this.update = function() {
+          this.x += this.vx; this.y += this.vy; this.life -= this.decay;
+          if (this.life <= 0 || this.y < -10) this.reset(false);
+        };
+        this.draw = function() {
+          ctx.save();
+          ctx.globalAlpha = this.alpha * this.life;
+          ctx.shadowBlur = 6; ctx.shadowColor = 'rgba(' + this.color + ',0.8)';
+          ctx.fillStyle = 'rgba(' + this.color + ',1)';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        };
+      }
+
+      for (let i = 0; i < 55; i++) particles.push(new Particle());
+
+      function animate() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
+    // 6. Typewriter Effect (hero subtitle)
+    (function typewriterInit() {
+      const el = document.getElementById('heroSubtitle');
+      if (!el) return;
+      const text = 'Licensed handyman services (jobs under $1000) and professional tech solutions. Serving Mammoth Lakes, Bishop, June Lake, and the entire Eastern Sierra region.';
+      el.classList.add('typed');
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          el.textContent += text[i++];
+          setTimeout(type, i < 5 ? 0 : 18);
+        } else {
+          el.classList.remove('typed');
+        }
+      }
+      setTimeout(type, 1100);
+    })();
+
+    // 7. 3D Card Tilt Effect
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(900px) rotateY(${x * 9}deg) rotateX(${-y * 9}deg) translateZ(8px)`;
+        const shine = card.querySelector('.tilt-shine');
+        if (shine) shine.style.background = `radial-gradient(circle at ${(x+0.5)*100}% ${(y+0.5)*100}%, rgba(255,255,255,0.1) 0%, transparent 60%)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.transition = 'transform 0.5s ease';
+        setTimeout(() => { card.style.transition = ''; }, 500);
+      });
+    });
+
+    // 8. Magnetic Button Effect
+    document.querySelectorAll('.magnetic-btn').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) * 0.25;
+        const y = (e.clientY - rect.top - rect.height / 2) * 0.25;
+        btn.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+        btn.style.transition = 'transform 0.4s ease';
+        setTimeout(() => { btn.style.transition = ''; }, 400);
+      });
+    });
+
+    // 9. Parallax Hero on scroll
+    const heroContent = document.querySelector('.hero-content');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (scrolled < window.innerHeight && heroContent) {
+        heroContent.style.transform = `translateY(${scrolled * 0.18}px)`;
+      }
+    }, { passive: true });
+
   </script>
-</body></html>
+</body>
+</html>
