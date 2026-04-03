@@ -575,7 +575,7 @@
     function getServiceCategory(service) { const handymanServices = ['drywall', 'plumbing', 'electrical', 'doors-windows', 'flooring', 'painting']; return handymanServices.includes(service) ? 'handyman' : 'tech'; }
     const SUPABASE_URL = 'https://jcrwflbntaolulrbnbeq.supabase.co';
     // ⚠️ Replace with your Supabase anon key from: Dashboard → Settings → API → anon public
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjcndmbGJudGFvbHVscmJuYmVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NjIxMzcsImV4cCI6MjA5MDEzODEzN30._okEX_ol6Vmgwtt5aX1D4DmDlcr0gJF5ttats3AETMk';
     const RESEND_API_KEY = 're_W8A9vNei_MmXAXdqqCKrCDUQruP7dBEtb';
     async function sendEmailNotification(formData) {
       const serviceDisplay = serviceNames[formData.service] || formData.service;
