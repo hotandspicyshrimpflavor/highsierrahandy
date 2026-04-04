@@ -317,3 +317,71 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+// ── 6. Cursor Spotlight on Hero ──────────────────────────────
+(function () {
+  var hero = document.querySelector('.hero');
+  if (!hero) return;
+  hero.addEventListener('mousemove', function (e) {
+    var rect = hero.getBoundingClientRect();
+    hero.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%');
+    hero.style.setProperty('--mouse-y', ((e.clientY - rect.top)  / rect.height * 100).toFixed(1) + '%');
+  });
+})();
+
+// ── 7. 3D Card Tilt ──────────────────────────────────────────
+(function () {
+  var TILT = 8; // max degrees
+  document.querySelectorAll('.stat-card, .feature-card, .why-card').forEach(function (card) {
+    card.addEventListener('mousemove', function (e) {
+      var r   = card.getBoundingClientRect();
+      var rx  = (((e.clientY - r.top)  / r.height) - 0.5) * -TILT * 2;
+      var ry  = (((e.clientX - r.left) / r.width)  - 0.5) *  TILT * 2;
+      card.style.transition = 'transform 0.1s ease';
+      card.style.transform  = 'perspective(700px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) scale(1.04)';
+    });
+    card.addEventListener('mouseleave', function () {
+      card.style.transition = 'transform 0.5s ease';
+      card.style.transform  = '';
+    });
+  });
+})();
+
+// ── 8. Magnetic Hero Buttons ─────────────────────────────────
+(function () {
+  document.querySelectorAll('.hero-actions .btn').forEach(function (btn) {
+    btn.addEventListener('mousemove', function (e) {
+      var r  = btn.getBoundingClientRect();
+      var dx = (e.clientX - r.left - r.width  / 2) * 0.2;
+      var dy = (e.clientY - r.top  - r.height / 2) * 0.2;
+      btn.style.transition = 'transform 0.15s ease';
+      btn.style.transform  = 'translate(' + dx.toFixed(1) + 'px, ' + dy.toFixed(1) + 'px) scale(1.06)';
+    });
+    btn.addEventListener('mouseleave', function () {
+      btn.style.transition = 'transform 0.45s ease';
+      btn.style.transform  = '';
+    });
+  });
+})();
+
+// ── 9. Toast Notification ────────────────────────────────────
+function showToast(msg, duration) {
+  var existing = document.getElementById('hsToast');
+  if (existing) { clearTimeout(existing._timer); existing.remove(); }
+  var t = document.createElement('div');
+  t.id = 'hsToast';
+  t.className = 'toast';
+  t.innerHTML =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">' +
+    '<polyline points="20 6 9 17 4 12"/></svg>' +
+    (msg || 'Done!');
+  document.body.appendChild(t);
+  // Double rAF ensures transition fires
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { t.classList.add('show'); });
+  });
+  t._timer = setTimeout(function () {
+    t.classList.remove('show');
+    setTimeout(function () { if (t.parentNode) t.remove(); }, 500);
+  }, duration || 4500);
+}
