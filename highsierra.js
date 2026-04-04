@@ -385,3 +385,110 @@ function showToast(msg, duration) {
     setTimeout(function () { if (t.parentNode) t.remove(); }, 500);
   }, duration || 4500);
 }
+
+// ── 10. Preloader ─────────────────────────────────────────────
+(function () {
+  var preloader = document.getElementById('preloader');
+  if (!preloader) return;
+  function hidePreloader() {
+    preloader.classList.add('hidden');
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(hidePreloader, 300);
+  } else {
+    window.addEventListener('load', function () {
+      setTimeout(hidePreloader, 300);
+    });
+  }
+})();
+
+// ── 11. Sticky Nav + Scroll Progress + Back-to-Top ───────────
+(function () {
+  var nav         = document.getElementById('siteNav');
+  var progress    = document.getElementById('scrollProgress');
+  var backToTop   = document.getElementById('backToTop');
+  var hamburger   = document.getElementById('navHamburger');
+  var navLinks    = document.getElementById('navLinks');
+
+  // Scroll handler — nav glass, progress bar, back-to-top visibility
+  function onScroll() {
+    var scrollY = window.scrollY || window.pageYOffset;
+    var docH    = document.documentElement.scrollHeight;
+    var winH    = window.innerHeight;
+    var pct     = docH > winH ? (scrollY / (docH - winH) * 100) : 0;
+
+    if (nav)       nav.classList.toggle('scrolled', scrollY > 50);
+    if (progress)  progress.style.width = Math.min(pct, 100).toFixed(2) + '%';
+    if (backToTop) backToTop.classList.toggle('visible', scrollY > 400);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run once on load
+
+  // Back-to-top click
+  if (backToTop) {
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Hamburger toggle
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function () {
+      var isOpen = hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // Close mobile menu on link click
+    navLinks.querySelectorAll('.nav-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+})();
+
+// ── 12. Active Nav Section Tracking ──────────────────────────
+(function () {
+  var navLinkEls = document.querySelectorAll('.nav-link[data-nav]');
+  if (!navLinkEls.length || !window.IntersectionObserver) return;
+
+  var current = '';
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        current = entry.target.id;
+        navLinkEls.forEach(function (link) {
+          link.classList.toggle('active', link.dataset.nav === current);
+        });
+      }
+    });
+  }, {
+    rootMargin: '-20% 0px -70% 0px',
+    threshold: 0
+  });
+
+  document.querySelectorAll('section[id]').forEach(function (sec) {
+    observer.observe(sec);
+  });
+})();
+
+// ── 13. Textarea Char Count ───────────────────────────────────
+(function () {
+  var textarea  = document.getElementById('message');
+  var charCount = document.getElementById('charCount');
+  if (!textarea || !charCount) return;
+
+  textarea.addEventListener('input', function () {
+    var len = textarea.value.length;
+    var max = parseInt(textarea.getAttribute('maxlength') || '1000', 10);
+    charCount.textContent = len + ' / ' + max;
+    charCount.classList.toggle('warn', len > max * 0.85);
+  });
+})();
