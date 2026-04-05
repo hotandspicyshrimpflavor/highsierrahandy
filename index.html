@@ -1086,11 +1086,12 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
           })
         });
         const result = await response.json();
-        console.log('Resend Response:', response.status, result);
+        console.log('Resend status:', response.status, result);
         if (!response.ok) {
-          alert('Email Error: ' + (result.message || response.statusText));
+          // Log but don't alert — quote is already saved in Supabase
+          console.warn('Resend error (non-blocking):', result.message || result.error || response.statusText);
         }
-        return response.ok;
+        return true; // always resolve — Supabase save already succeeded
       } catch (error) { console.error('Email error:', error); return false; }
     }
     async function handleSubmit(e, supabase) {
