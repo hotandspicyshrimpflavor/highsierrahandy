@@ -1147,14 +1147,29 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     const style = document.createElement('style');
     style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
     document.head.appendChild(style);
-    // Load Supabase and attach form listener
+    // Supabase client reference — populated once CDN loads
+    let _supabase = null;
+
+    // Attach submit listener IMMEDIATELY — never depend on an external CDN loading first
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // always stop the native GET form submission
+      if (!_supabase) {
+        alert('Still loading, please wait a moment and try again.');
+        return;
+      }
+      handleSubmit(e, _supabase);
+    });
+
+    // Load Supabase asynchronously in the background
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
     script.onload = function() {
-      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
-        handleSubmit(e, supabase);
-      });
+      _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    };
+    script.onerror = function() {
+      // CDN failed — stub it so the form can still send the email notification
+      console.warn('Supabase CDN failed to load — form will send email only');
+      _supabase = { from: function() { return { insert: function() { return Promise.resolve({ error: null }); } }; } };
     };
     document.body.appendChild(script);
   </script>
