@@ -1,0 +1,17 @@
+{
+  "name": "High Sierra Handymen",
+  "short_name": "HSHandymen",
+  "description": "Handyman and tech services for Mammoth Lakes, Bishop, June Lake, and the Eastern Sierra.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D1117",
+  "theme_color": "#FF6B35",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
