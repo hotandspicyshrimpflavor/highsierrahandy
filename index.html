@@ -138,10 +138,9 @@
     .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
     .feature-card { padding: 32px 24px; border-radius: 20px; background: rgba(15, 42, 71, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; transition: all 0.3s ease; }
     .feature-card:hover { transform: translateY(-8px); border-color: rgba(15, 42, 71, 0.3); }
-    .feature-icon { width: 64px; height: 64px; border-radius: 14px; background: rgba(15, 42, 71, 0.06); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.25s ease; }
-    .feature-card:hover .feature-icon { background: rgba(15, 42, 71, 0.1); border-color: var(--brand-navy); }
-    .feature-card:hover .feature-icon { transform: scale(1.1); }
-    .feature-icon svg { color: var(--brand-blue); width: 28px; height: 28px; }
+    .feature-icon { width: 64px; height: 64px; border-radius: 14px; background: var(--brand-navy); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.25s ease; }
+    .feature-card:hover .feature-icon { background: var(--brand-red); transform: scale(1.05); }
+    .feature-icon svg { color: #FFFFFF; width: 28px; height: 28px; }
     .feature-card h4 { font-weight: 600; margin-bottom: 8px; }
     .feature-card p { font-size: 14px; color: var(--text-muted); }
     .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
@@ -246,11 +245,9 @@
     .why-card { padding: 32px; background: var(--bg-card); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
     .why-card:hover { transform: translateY(-4px); border-color: rgba(200, 16, 46, 0.3); }
     .why-card-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
-    .why-card-icon.orange, .why-card-icon.cyan, .why-card-icon.green { background: rgba(15, 42, 71, 0.06); border: 1px solid var(--border); }
-    .why-card-icon svg { width: 24px; height: 24px; }
-    .why-card-icon.orange svg { color: var(--brand-red); }
-    .why-card-icon.cyan svg { color: var(--brand-blue); }
-    .why-card-icon.green svg { color: var(--brand-red); }
+    .why-card-icon.orange, .why-card-icon.cyan, .why-card-icon.green { background: var(--brand-navy); }
+    .why-card-icon svg { width: 24px; height: 24px; color: #FFFFFF; }
+    .why-card-icon.orange svg, .why-card-icon.cyan svg, .why-card-icon.green svg { color: #FFFFFF; }
     .why-card h4 { font-weight: 600; margin-bottom: 8px; }
     .why-card p { font-size: 14px; color: var(--text-muted); }
     @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } .cert-badges { gap: 12px; } .cert-badge { padding: 8px 16px; font-size: 13px; } }
@@ -382,9 +379,9 @@
       align-items: center; gap: 28px; margin: 0; padding: 0;
     }
     .nav-link {
-      color: rgba(240,246,252,0.75);
+      color: rgba(255,255,255,0.85);
       text-decoration: none; font-size: 14.5px; font-weight: 500;
-      transition: color 0.3s ease; position: relative; white-space: nowrap;
+      transition: color 0.2s ease; position: relative; white-space: nowrap;
     }
     .nav-link::after {
       content: ''; position: absolute; bottom: -4px; left: 0;
@@ -392,9 +389,9 @@
       background: linear-gradient(90deg, var(--brand-red), var(--brand-blue));
       border-radius: 1px; transition: width 0.35s ease;
     }
-    .nav-link:hover { color: var(--text); }
+    .nav-link:hover { color: #FFFFFF; }
     .nav-link:hover::after { width: 100%; }
-    .nav-link.active { color: var(--text); }
+    .nav-link.active { color: #FFFFFF; }
     .nav-link.active::after { width: 100%; }
     .nav-link.nav-cta {
       color: white !important;
