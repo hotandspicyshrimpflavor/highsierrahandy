@@ -119,10 +119,10 @@
     .service-title.cyan { color: var(--brand-blue); }
     .service-subtitle { color: var(--text-muted); font-size: 15px; }
     .service-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .service-list-item { padding: 16px; border-radius: 12px; background: rgba(15, 42, 71, 0.5); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
+    .service-list-item { padding: 16px; border-radius: 10px; background: var(--bg); border: 1px solid var(--border); transition: all 0.25s ease; }
+    .service-list-item:hover { border-color: var(--brand-navy); transform: translateX(2px); }
     .service-list-item:hover { transform: translateX(4px); }
-    .service-list-item.orange:hover { border-color: rgba(200, 16, 46, 0.3); }
-    .service-list-item.cyan:hover { border-color: rgba(15, 42, 71, 0.3); }
+    .service-list-item.orange:hover, .service-list-item.cyan:hover { border-color: var(--brand-navy); }
     .service-list-item svg { width: 24px; height: 24px; margin-bottom: 8px; }
     .service-list-item.orange svg { color: var(--brand-red); }
     .service-list-item.cyan svg { color: var(--brand-blue); }
@@ -138,7 +138,8 @@
     .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
     .feature-card { padding: 32px 24px; border-radius: 20px; background: rgba(15, 42, 71, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; transition: all 0.3s ease; }
     .feature-card:hover { transform: translateY(-8px); border-color: rgba(15, 42, 71, 0.3); }
-    .feature-icon { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, rgba(200, 16, 46, 0.15), rgba(15, 42, 71, 0.15)); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: transform 0.3s ease; }
+    .feature-icon { width: 64px; height: 64px; border-radius: 14px; background: rgba(15, 42, 71, 0.06); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.25s ease; }
+    .feature-card:hover .feature-icon { background: rgba(15, 42, 71, 0.1); border-color: var(--brand-navy); }
     .feature-card:hover .feature-icon { transform: scale(1.1); }
     .feature-icon svg { color: var(--brand-blue); width: 28px; height: 28px; }
     .feature-card h4 { font-weight: 600; margin-bottom: 8px; }
@@ -239,15 +240,13 @@
     .floating-cta { display: none; position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 1000; padding: 16px 32px; border-radius: 50px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 30px rgba(200, 16, 46, 0.5); text-decoration: none; cursor: pointer; border: none; animation: pulse-glow 2s ease-in-out infinite; }
     @media (max-width: 768px) { .floating-cta { display: flex; align-items: center; gap: 8px; } .testimonial-btn { min-width: 48px; min-height: 48px; } }
     .cert-badges { display: flex; justify-content: center; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
-    .cert-badge { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: rgba(15, 42, 71, 0.8); border: 1px solid var(--border); border-radius: 12px; font-size: 14px; font-weight: 500; }
+    .cert-badge { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--bg-card); border: 1px solid var(--border-strong); border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--text); }
     .cert-badge svg { width: 20px; height: 20px; color: var(--brand-red); }
     .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
     .why-card { padding: 32px; background: var(--bg-card); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
     .why-card:hover { transform: translateY(-4px); border-color: rgba(200, 16, 46, 0.3); }
     .why-card-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
-    .why-card-icon.orange { background: rgba(200, 16, 46, 0.15); }
-    .why-card-icon.cyan { background: rgba(15, 42, 71, 0.15); }
-    .why-card-icon.green { background: rgba(200, 16, 46, 0.15); }
+    .why-card-icon.orange, .why-card-icon.cyan, .why-card-icon.green { background: rgba(15, 42, 71, 0.06); border: 1px solid var(--border); }
     .why-card-icon svg { width: 24px; height: 24px; }
     .why-card-icon.orange svg { color: var(--brand-red); }
     .why-card-icon.cyan svg { color: var(--brand-blue); }
@@ -309,7 +308,7 @@
     .estimator-question{font-family:var(--font-heading);font-size:22px;font-weight:700;margin-bottom:6px}
     .estimator-sub{color:var(--text-muted);font-size:14px;margin-bottom:28px}
     .estimator-options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:28px}
-    .estimator-option{padding:16px 18px;border-radius:13px;background:rgba(15, 42, 71,0.6);border:2px solid rgba(255,255,255,0.07);cursor:pointer;text-align:left;font-size:14px;font-weight:500;color:var(--text);transition:all 0.2s;display:flex;align-items:center;gap:10px}
+    .estimator-option{padding:16px 18px;border-radius:12px;background:var(--bg-card);border:2px solid var(--border-strong);cursor:pointer;text-align:left;font-size:14px;font-weight:500;color:var(--text);transition:all 0.2s;display:flex;align-items:center;gap:10px}
     .estimator-option:hover{border-color:var(--brand-red);transform:translateY(-2px)}
     .estimator-option.selected{border-color:var(--brand-red);background:rgba(200, 16, 46,0.1);color:var(--brand-red)}
     .estimator-option .opt-icon{width:34px;height:34px;border-radius:9px;background:rgba(200, 16, 46,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px}
@@ -460,11 +459,11 @@
 
     /* === TRUST MARQUEE === */
     .trust-strip {
-      background: rgba(15, 42, 71,0.6);
-      border-top: 1px solid rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: rgba(15, 42, 71, 0.04);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       padding: 12px 0; overflow: hidden;
-      position: relative; backdrop-filter: blur(8px);
+      position: relative;
     }
     .trust-strip::before, .trust-strip::after {
       content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
@@ -472,11 +471,11 @@
     }
     .trust-strip::before {
       left: 0;
-      background: linear-gradient(90deg, rgba(15, 42, 71,1), transparent);
+      background: linear-gradient(90deg, var(--bg), transparent);
     }
     .trust-strip::after {
       right: 0;
-      background: linear-gradient(-90deg, rgba(15, 42, 71,1), transparent);
+      background: linear-gradient(-90deg, var(--bg), transparent);
     }
     .trust-track {
       display: flex; align-items: center;
@@ -493,7 +492,7 @@
     .trust-item svg { color: var(--brand-red); flex-shrink: 0; }
     .trust-sep {
       width: 4px; height: 4px; border-radius: 50%;
-      background: rgba(255,255,255,0.15); flex-shrink: 0;
+      background: rgba(15, 42, 71, 0.2); flex-shrink: 0;
     }
 
     /* === HERO TRUST ROW === */
@@ -548,8 +547,8 @@
     /* === CERT BADGE HOVER === */
     .cert-badge { transition: all 0.3s ease; cursor: default; }
     .cert-badge:hover {
-      border-color: rgba(200, 16, 46,0.35);
-      background: rgba(200, 16, 46,0.06);
+      border-color: var(--brand-navy);
+      background: rgba(15, 42, 71, 0.04);
       transform: translateY(-2px);
     }
 
