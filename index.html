@@ -22,7 +22,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       /* === Brand palette (est. 2026-10-08) === */
@@ -42,10 +42,13 @@
       --border:          #E1E5EB;
       --border-strong:   #C5CCD5;
       --border-dark:     rgba(255,255,255,0.12);
+      --steel:           #64748B;
+      --amber:           #F59E0B;
       --shadow-sm:       0 1px 2px rgba(15,42,71,0.06);
       --shadow-md:       0 4px 12px rgba(15,42,71,0.08);
       --shadow-lg:       0 12px 32px rgba(15,42,71,0.12);
       --font-heading:    'Inter', system-ui, sans-serif;
+      --font-display:    'Oswald', 'Arial Narrow', sans-serif;
       --font-body:       'Inter', system-ui, sans-serif;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -76,7 +79,7 @@
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 50px; background: rgba(15, 42, 71, 0.8); border: 1px solid var(--border); margin-bottom: 32px; animation: slide-up 0.8s ease-out forwards; }
     .hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-red); animation: pulse-glow 2s ease-in-out infinite; }
     .hero-badge-text { font-size: 14px; color: rgba(255,255,255,0.85); }
-    .hero-title { font-family: var(--font-heading); font-size: clamp(36px, 8vw, 72px); font-weight: 700; line-height: 1.1; margin-bottom: 24px; color: #FFFFFF; animation: slide-up 0.8s ease-out 0.1s forwards; opacity: 0; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(40px, 8.5vw, 82px); font-weight: 700; line-height: 0.95; margin-bottom: 24px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.01em; animation: slide-up 0.8s ease-out 0.1s forwards; opacity: 0; }
     .hero-subtitle { font-size: clamp(16px, 2vw, 20px); color: rgba(255,255,255,0.88); max-width: 640px; margin: 0 auto 40px; animation: slide-up 0.8s ease-out 0.2s forwards; opacity: 0; }
     .hero-actions { display: flex; gap: 16px; justify-content: center; animation: slide-up 0.8s ease-out 0.3s forwards; opacity: 0; }
     .btn { padding: 14px 28px; border-radius: 12px; font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer; border: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
@@ -96,28 +99,23 @@
     .section-header { text-align: center; margin-bottom: 64px; }
     .section-tag { display: inline-block; padding: 6px 16px; border-radius: 50px; font-size: 14px; font-weight: 500; margin-bottom: 16px; }
     .tag-orange, .tag-cyan, .tag-green { background: rgba(15, 42, 71, 0.06); color: var(--brand-navy); }
-    .section-title { font-family: var(--font-heading); font-size: clamp(32px, 5vw, 48px); font-weight: 700; margin-bottom: 16px; }
+    .section-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 52px); font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; margin-bottom: 16px; color: var(--brand-navy); line-height: 1.1; }
+    .section-title em { font-style: normal; color: var(--brand-red); }
+    .section-title em.brand { color: var(--brand-blue); }
     .section-desc { color: var(--text-muted); font-size: 18px; max-width: 640px; margin: 0 auto; }
     .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-    .service-card { padding: 48px; border-radius: 24px; background: var(--bg-card); border: 1px solid; position: relative; overflow: hidden; transition: all 0.4s ease; }
-    .service-card::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.5s ease; }
-    .service-card:hover { transform: translateY(-8px); }
-    .service-card.orange { border-color: rgba(200, 16, 46, 0.3); }
-    .service-card.orange:hover { border-color: rgba(200, 16, 46, 0.6); box-shadow: 0 20px 60px rgba(200, 16, 46, 0.15); }
-    .service-card.orange::before { background: radial-gradient(circle at top left, rgba(200, 16, 46, 0.2), transparent 70%); }
-    .service-card.cyan { border-color: rgba(15, 42, 71, 0.3); }
-    .service-card.cyan:hover { border-color: rgba(15, 42, 71, 0.6); box-shadow: 0 20px 60px rgba(15, 42, 71, 0.15); }
-    .service-card.cyan::before { background: radial-gradient(circle at top left, rgba(15, 42, 71, 0.2), transparent 70%); }
-    .service-card:hover::before { opacity: 1; }
+    .service-card { padding: 40px 36px; border-radius: 16px; background: var(--bg-card); border: 1px solid var(--border-strong); border-top: 4px solid var(--brand-navy); position: relative; transition: all 0.25s ease; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-top-color: var(--brand-red); }
+    .service-card-label { display: inline-block; font-family: var(--font-display); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--brand-red); margin-bottom: 12px; }
+    .service-price { display: inline-block; font-family: var(--font-display); font-size: 13px; font-weight: 500; color: var(--text-muted); margin-left: 12px; padding: 4px 10px; background: var(--bg); border-radius: 4px; }
     .service-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
     .service-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
     .service-icon.orange { background: linear-gradient(135deg, var(--brand-red), #C8102E); }
     .service-icon.cyan { background: linear-gradient(135deg, var(--brand-blue), #00A8CC); }
     .service-icon svg { width: 32px; height: 32px; color: white; }
-    .service-title { font-family: var(--font-heading); font-size: 28px; font-weight: 700; }
-    .service-title.orange { color: var(--brand-red); }
-    .service-title.cyan { color: var(--brand-blue); }
-    .service-subtitle { color: var(--text-muted); font-size: 15px; }
+    .service-title { font-family: var(--font-display); font-size: 26px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; color: var(--brand-navy); line-height: 1.15; }
+    .service-title.orange, .service-title.cyan { color: var(--brand-navy); }
+    .service-subtitle { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
     .service-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .service-list-item { padding: 16px; border-radius: 10px; background: var(--bg); border: 1px solid var(--border); transition: all 0.25s ease; }
     .service-list-item:hover { border-color: var(--brand-navy); transform: translateX(2px); }
@@ -134,7 +132,7 @@
     .stat-card:hover { transform: scale(1.05); }
     .stat-value { font-family: var(--font-heading); font-size: clamp(36px, 5vw, 52px); font-weight: 700; color: var(--brand-navy); margin-bottom: 8px; }
     .stat-value::after { content: ''; display: block; width: 32px; height: 3px; background: var(--brand-red); border-radius: 2px; margin: 10px auto 0; }
-    .stat-label { color: var(--text-muted); font-size: 14px; }
+    .stat-label { color: var(--text); font-size: 14px; font-weight: 500; }
     .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
     .feature-card { padding: 32px 24px; border-radius: 20px; background: rgba(15, 42, 71, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; transition: all 0.3s ease; }
     .feature-card:hover { transform: translateY(-8px); border-color: rgba(15, 42, 71, 0.3); }
@@ -174,7 +172,7 @@
     .testimonial-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(139, 148, 158, 0.3); border: none; cursor: pointer; transition: all 0.3s ease; }
     .testimonial-dot.active { background: var(--brand-blue); width: 32px; border-radius: 5px; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    .contact-info h2 { font-family: var(--font-heading); font-size: clamp(32px, 5vw, 44px); font-weight: 700; margin-bottom: 20px; }
+    .contact-info h2 { font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; margin-bottom: 20px; color: var(--brand-navy); }
     .contact-info > p { color: var(--text-muted); font-size: 18px; margin-bottom: 40px; }
     .contact-items { margin-bottom: 40px; }
     .contact-item { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
@@ -247,6 +245,31 @@
     .why-card h4 { font-weight: 600; margin-bottom: 8px; }
     .why-card p { font-size: 14px; color: var(--text-muted); }
     @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } .cert-badges { gap: 12px; } .cert-badge { padding: 8px 16px; font-size: 13px; } }
+    /* === HOW IT WORKS (field-related 3-step process) === */
+    .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .how-step { background: var(--bg); border: 1px solid var(--border); border-top: 4px solid var(--brand-navy); border-radius: 12px; padding: 40px 28px; position: relative; transition: all 0.25s ease; }
+    .how-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-top-color: var(--brand-red); }
+    .how-step-num { font-family: var(--font-display); font-size: 56px; font-weight: 700; color: var(--brand-red); line-height: 1; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .how-step-icon { width: 56px; height: 56px; border-radius: 12px; background: var(--brand-navy); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: all 0.25s ease; }
+    .how-step:hover .how-step-icon { background: var(--brand-red); }
+    .how-step-icon svg { width: 26px; height: 26px; color: #FFFFFF; }
+    .how-step h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 12px; color: var(--brand-navy); }
+    .how-step p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
+    @media (max-width: 768px) { .how-grid { grid-template-columns: 1fr; } }
+    /* === SERVICE AREA (field-related local presence) === */
+    .area-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
+    .area-card { background: var(--bg-card); border: 1px solid var(--border-strong); border-left: 4px solid var(--brand-navy); border-radius: 8px; padding: 24px 20px; transition: all 0.25s ease; position: relative; }
+    .area-card:hover { border-left-color: var(--brand-red); transform: translateX(2px); box-shadow: var(--shadow-sm); }
+    .area-card.hq { border-left-color: var(--brand-red); background: linear-gradient(135deg, var(--bg-card) 0%, rgba(200, 16, 46, 0.04) 100%); }
+    .area-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .area-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; color: var(--brand-navy); }
+    .area-card.hq .area-name { color: var(--brand-red); }
+    .area-tag { font-family: var(--font-display); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brand-red); padding: 3px 8px; background: rgba(200, 16, 46, 0.08); border-radius: 3px; }
+    .area-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+    .area-services { display: flex; gap: 6px; flex-wrap: wrap; }
+    .area-services span { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-navy); padding: 3px 8px; background: var(--bg); border-radius: 3px; border: 1px solid var(--border); }
+    @media (max-width: 900px) { .area-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .area-grid { grid-template-columns: 1fr; } }
     .btn, a, button { min-height: 44px; }
   </style>
 
@@ -731,18 +754,53 @@
       <span>Proudly serving <strong>Mammoth Lakes</strong>, <strong>Bishop</strong>, <strong>June Lake</strong>, <strong>Crowley Lake</strong>, and all of <strong>Eastern Sierra</strong></span>
     </div>
   </div>
+  <section id="how-it-works">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-tag">How It Works</span>
+        <h2 class="section-title">Three Steps. <em>Done Right.</em></h2>
+        <p class="section-desc">From your first call to a finished job — here's how we work.</p>
+      </div>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-step-num">01</div>
+          <div class="how-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <h3>Request a Quote</h3>
+          <p>Call, text, or fill out the form. We respond within 24 hours with a free, no-obligation estimate.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">02</div>
+          <div class="how-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div>
+          <h3>Schedule the Work</h3>
+          <p>We confirm timing that works for you. Same-week availability for most jobs across Eastern Sierra.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">03</div>
+          <div class="how-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg></div>
+          <h3>Job Done Right</h3>
+          <p>Quality work, clean workspace, and a walkthrough when we're done. Your satisfaction is guaranteed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="services">
     <div class="section-inner">
       <div class="section-header">
         <span class="section-tag">Our Expertise</span>
-        <h2 class="section-title">Two Specialties, <span class="gradient-text">One Team</span></h2>
-        <p class="section-desc">Certified handyman services for jobs under $1000, plus expert tech solutions for your connected home or business</p>
+        <h2 class="section-title">Two Specialties. <em>One Team.</em></h2>
+        <p class="section-desc">Licensed handyman services for jobs under $1000, plus expert smart-home and network solutions for your home or business.</p>
       </div>
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card featured">
           <div class="service-header">
             <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-            <div><h3 class="service-title">Handyman Services</h3><p class="service-subtitle">Small Jobs & Quick Fixes (Under $1000)</p></div>
+            <div>
+              <span class="service-card-label">Service 01</span>
+              <h3 class="service-title">Handyman Services</h3>
+              <p class="service-subtitle">Small Jobs & Quick Fixes (Under $1000)</p>
+              <span class="service-price">From $75</span>
+            </div>
           </div>
           <ul class="service-list">
             <li class="service-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><h4>Drywall & Patching</h4><p>Holes, cracks, water damage repair</p></li>
@@ -753,10 +811,15 @@
             <li class="service-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg><h4>Painting</h4><p>Touch-ups, walls, trim, cabinets</p></li>
           </ul>
         </div>
-        <div class="service-card">
+        <div class="service-card secondary">
           <div class="service-header">
             <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
-            <div><h3 class="service-title">Network & IoT</h3><p class="service-subtitle">Smart solutions for connected spaces</p></div>
+            <div>
+              <span class="service-card-label">Service 02</span>
+              <h3 class="service-title">Network & IoT</h3>
+              <p class="service-subtitle">Smart solutions for connected spaces</p>
+              <span class="service-price">From $150</span>
+            </div>
           </div>
           <ul class="service-list">
             <li class="service-list-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg><h4>Network Installation</h4><p>Cabling, routers, switches, access points</p></li>
@@ -774,7 +837,7 @@
     <div class="section-inner">
       <div class="section-header">
         <span class="section-tag">Why Choose Us</span>
-        <h2 class="section-title">Your <span class="gradient-text">Local Experts</span> in Eastern Sierra</h2>
+        <h2 class="section-title">Your <span class="gradient-text">Local Experts</span> in <em class="brand">Eastern Sierra</em></h2>
         <p class="section-desc">We know the unique challenges of mountain living - from frozen pipes to WiFi dead zones</p>
       </div>
       <div class="why-grid">
@@ -790,11 +853,46 @@
       </div>
     </div>
   </section>
+  <section id="service-area">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-tag">Where We Work</span>
+        <h2 class="section-title">Serving <em class="brand">Eastern Sierra</em></h2>
+        <p class="section-desc">Based in Mammoth Lakes. Working across the high country — Bishop, June Lake, Crowley Lake, and everywhere in between.</p>
+      </div>
+      <div class="area-grid">
+        <div class="area-card hq">
+          <div class="area-card-head">
+            <span class="area-name">Mammoth Lakes</span>
+            <span class="area-tag">HQ</span>
+          </div>
+          <div class="area-meta">Base of operations · Same-day available</div>
+          <div class="area-services"><span>Handyman</span><span>Smart Home</span><span>Network</span></div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-head"><span class="area-name">Bishop</span></div>
+          <div class="area-meta">~40 mi south · 1–2 day response</div>
+          <div class="area-services"><span>Handyman</span><span>Smart Home</span></div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-head"><span class="area-name">June Lake</span></div>
+          <div class="area-meta">~20 mi north · Same-week</div>
+          <div class="area-services"><span>Handyman</span><span>Network</span></div>
+        </div>
+        <div class="area-card">
+          <div class="area-card-head"><span class="area-name">Crowley Lake</span></div>
+          <div class="area-meta">~15 mi south · Same-week</div>
+          <div class="area-services"><span>Handyman</span><span>Network</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="stats-section">
     <div class="section-inner">
       <div class="section-header">
-        <span class="section-tag">Why HSHandymen</span>
-        <h2 class="section-title">Built on <span class="gradient-text">Trust</span> & Excellence</h2>
+        <span class="section-tag">By the Numbers</span>
+        <h2 class="section-title">Built on <em>Trust</em> & Excellence</h2>
       </div>
       <div class="stats-grid">
         <div class="stat-card"><div class="stat-value" data-target="100" data-suffix="+">0+</div><p class="stat-label">Projects Completed</p></div>
